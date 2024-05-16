@@ -1,12 +1,20 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation} from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import Navbar from '../components/navbar/Navbar';
+import HeaderBanner from '../pages/Home/HeaderBanner/HeaderBanner';
+
+
 
 const Main = () => {
+
+    const path = useLocation()
+    console.log(path.pathname);
+
     return (
         <div>
-            <Navbar></Navbar>
+            <div className="fixed top-0 z-[99] w-full"><Navbar></Navbar></div>
+            <div className={`${path.pathname == '/' ? '': 'hidden'}`}><HeaderBanner></HeaderBanner></div>
             <div className='max-w-screen-xl mx-auto'>
                 <Outlet></Outlet>
             </div>

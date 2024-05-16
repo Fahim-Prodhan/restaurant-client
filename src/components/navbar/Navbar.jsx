@@ -117,7 +117,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-[#2d32503f]">
+      <nav className="bg-[#1e23293d]">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* Left side website name and logo */}
           <Link
