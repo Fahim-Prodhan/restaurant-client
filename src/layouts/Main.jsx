@@ -15,7 +15,7 @@ const Main = () => {
         <div>
             <div className="fixed top-0 z-[99] w-full"><Navbar></Navbar></div>
             <div className={`${path.pathname == '/' ? '': 'hidden'}`}><HeaderBanner></HeaderBanner></div>
-            <div className='max-w-screen-xl mx-auto'>
+            <div>
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>
