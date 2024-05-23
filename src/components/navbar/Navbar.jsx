@@ -68,7 +68,7 @@ const Navbar = () => {
       </li>
       <li><NavLink
         onClick={hamburger}
-        to="/needVolunteer"
+        to="/shop"
         style={({ isActive }) => ({
           color: isActive ? "#fff" : "#fff",
           border: isActive ? '2px solid #FDDE55' : 'none',
