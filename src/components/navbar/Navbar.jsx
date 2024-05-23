@@ -75,6 +75,17 @@ const Navbar = () => {
           borderRadius: isActive ? '5px' : '',
           padding: isActive ? '5px 12px' : '',
           background: isActive ? "#1111111f" : "transparent",
+        })}>OUR SHOP</NavLink>
+      </li>
+      <li><NavLink
+        onClick={hamburger}
+        to="/needVolunteer"
+        style={({ isActive }) => ({
+          color: isActive ? "#fff" : "#fff",
+          border: isActive ? '2px solid #FDDE55' : 'none',
+          borderRadius: isActive ? '5px' : '',
+          padding: isActive ? '5px 12px' : '',
+          background: isActive ? "#1111111f" : "transparent",
         })}>CONTACT US</NavLink>
       </li>
       <li><NavLink
@@ -99,17 +110,7 @@ const Navbar = () => {
           background: isActive ? "#1111111f" : "transparent",
         })}>OUR MENU</NavLink>
       </li>
-      <li><NavLink
-        onClick={hamburger}
-        to="/needVolunteer"
-        style={({ isActive }) => ({
-          color: isActive ? "#fff" : "#fff",
-          border: isActive ? '2px solid #FDDE55' : 'none',
-          borderRadius: isActive ? '5px' : '',
-          padding: isActive ? '5px 12px' : '',
-          background: isActive ? "#1111111f" : "transparent",
-        })}>OUR SHOP</NavLink>
-      </li>
+
     </>
   );
 
