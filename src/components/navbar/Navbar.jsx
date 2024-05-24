@@ -144,6 +144,14 @@ const Navbar = () => {
                     Login
                   </button>
                 </Link>
+                <Link to="/sign-up">
+                  <button
+                    type="button"
+                    className="text-[#222] bg-[#55fdd3] hover:bg-[#ffd310] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
+                  >
+                    SignUp
+                  </button>
+                </Link>
               </div>
             }
 
