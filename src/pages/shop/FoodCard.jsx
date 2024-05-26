@@ -3,12 +3,15 @@ import useAuth from '../../hook/useAuth';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { axiosSecure } from '../../hook/useAxiosSecure';
+import useAxiosSecure from '../../hook/useAxiosSecure';
+import useCart from '../../hook/useCart';
 
 const FoodCard = ({item}) => {
     const {name, image, recipe} = item;
     const {user} = useAuth()
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
+    const [,refetch] = useCart();
 
     const handleCard = (item)=>{
         if(user && user?.email){
@@ -26,6 +29,8 @@ const FoodCard = ({item}) => {
             if(res.data.insertedId){
                 alert("Item add to card")
             }
+            // refetch cart to update the cart item
+            refetch()
         })
         }else{
             Swal.fire({

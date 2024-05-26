@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import toast, { Toaster } from "react-hot-toast";
 import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../hook/useCart";
 // import { signOut } from "firebase/auth";
 // import auth from "../../firebase/firebase.config";
 // import toast from "react-hot-toast";
@@ -17,7 +18,7 @@ const Navbar = () => {
   const { user, setUser } = useContext(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
   const navigate = useNavigate()
-
+  const [cart] = useCart()
   useEffect(() => {
     localStorage.setItem('theme', theme)
     const localTheme = localStorage.getItem("theme")
@@ -118,7 +119,7 @@ const Navbar = () => {
       </li>
       <li><button className="text-white">
         <FaCartShopping/>
-        <div className="badge badge-secondary">+99</div>
+        <div className="badge badge-secondary">{cart.length}</div>
       </button>
       </li>
 
