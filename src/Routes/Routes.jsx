@@ -4,6 +4,7 @@ import Home from "../pages/Home/home/Home";
 import Shop from "../pages/shop/Shop";
 import Login from "../pages/login/Login";
 import SignUp from "../pages/signUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {

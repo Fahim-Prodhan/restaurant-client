@@ -1,22 +1,27 @@
-import React, {  useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import { Link, NavLink } from "react-router-dom";
-// import { AuthContext } from "../../provider/AuthProvider";
-// import { signOut } from "firebase/auth";
-// import auth from "../../firebase/firebase.config";
-import toast from "react-hot-toast";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from "react-tooltip";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
+import toast, { Toaster } from "react-hot-toast";
+import { FaCartShopping } from "react-icons/fa6";
+// import { signOut } from "firebase/auth";
+// import auth from "../../firebase/firebase.config";
+// import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [hamburger, setHamburger] = useState(false);
-  // const { user, setLoading } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
+  const navigate = useNavigate()
 
   useEffect(() => {
     localStorage.setItem('theme', theme)
     const localTheme = localStorage.getItem("theme")
-    console.log(localTheme);
+    // console.log(localTheme);
     document.querySelector('html').setAttribute('data-theme', localTheme)
   }, [theme])
 
@@ -28,26 +33,27 @@ const Navbar = () => {
     }
   }
 
-  // const handleLogout = () => {
-  //   setLoading(true);
-  //   signOut(auth)
-  //     .then(() => {
-  //       toast.success("Logout Successful", {
-  //         position: "top-right",
-  //         duration: 2000,
-  //         style: { width: "200px", height: "70px" },
-  //       });
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       toast.error("Logout Successful", {
-  //         position: "top-right",
-  //         duration: 2000,
-  //         style: { width: "200px", height: "70px" },
-  //       });
-  //     });
-  // };
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Hello");
+        toast.success("Logout Successful", {
+          position: "top-right",
+          duration: 2000,
+          style: { width: "200px", height: "70px" },
+        });
+        setUser(null)
+        navigate('/login')
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Logout Successful", {
+          position: "top-right",
+          duration: 2000,
+          style: { width: "200px", height: "70px" },
+        });
+      });
+  }
 
   const handleHamburger = () => {
     setHamburger(!hamburger);
@@ -110,6 +116,11 @@ const Navbar = () => {
           background: isActive ? "#1111111f" : "transparent",
         })}>OUR MENU</NavLink>
       </li>
+      <li><button className="text-white">
+        <FaCartShopping/>
+        <div className="badge badge-secondary">+99</div>
+      </button>
+      </li>
 
     </>
   );
@@ -134,7 +145,7 @@ const Navbar = () => {
           {/* Right side Buttons */}
           <div className="flex items-center lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
 
-            {
+            {!user &&
               <div className={`md:block space-x-3 gap-4 hidden`}>
                 <Link to="/login">
                   <button
@@ -155,7 +166,7 @@ const Navbar = () => {
               </div>
             }
 
-            {
+            {user &&
               <div
                 className={`flex items-center space-x-3 gap-4`}
               >
@@ -166,18 +177,12 @@ const Navbar = () => {
                     </div>
                   </div>
                 }
-                <Link
-                  className="hidden md:flex"
-                  onClick={''}
-                  to="/login"
-                >
-                  <button
-                    type="button"
-                    className="text-white bg-[#FF6D60] hover:bg-[#ff988f] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
-                  >
-                    Logout
-                  </button>
-                </Link>
+                <button
+                  onClick={handleLogOut}
+                  type="button"
+                  className="text-white bg-[#FF6D60] hover:bg-[#ff988f] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
+                >Logout</button>
+
               </div>
             }
 
@@ -283,6 +288,7 @@ const Navbar = () => {
       </nav>
 
       <Tooltip id="my-tooltip" />
+      <Toaster />
     </div>
   );
 };

@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
 
     const signIn = (email, password) => {
         setLoading(true)
-        return signInWithEmailAndPassword(email, password)
+        return signInWithEmailAndPassword(auth,email, password)
     }
 
     const logout = () => {
@@ -30,10 +30,11 @@ const AuthProvider = ({ children }) => {
                 setUser(currentUser)
                 setLoading(false)
             }
+            setLoading(false)
         })
 
         return () => {
-            return unsubscribe();
+           unsubscribe();
         }
     }, [])
 
@@ -44,7 +45,9 @@ const AuthProvider = ({ children }) => {
         loading,
         createUser,
         signIn,
-        logout
+        logout,
+        setLoading,
+        setUser
     }
 
 
